@@ -18,4 +18,9 @@ def encoding_categorical(df, ohe_threshold = 10, frq_threshold = 50):
             rare_counts = counts[counts < 0.01*len(df_encoded)].index
             df_encoded[col] = df_encoded[col].replace(rare_counts,'other')
 
+            freq_map = df_encoded[col].value_counts().to_dict()
+            df_encoded[col] = df_encoded[col].map(freq_map)
+
+    return df_encoded
+
 
